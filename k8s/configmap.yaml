@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: industrial-data
+data:
+  # You would add your CSV data here or mount from persistent volume
+  config.yaml: |
+    log_level: INFO
+    model_name: "all-MiniLM-L6-v2"
+    max_results: 10

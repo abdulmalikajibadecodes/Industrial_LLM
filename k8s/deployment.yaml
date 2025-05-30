@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: industrial-llm-api
+  labels:
+    app: industrial-llm-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: industrial-llm-api
+  template:
+    metadata:
+      labels:
+        app: industrial-llm-api
+    spec:
+      containers:
+      - name: api
+        image: your-registry/industrial-llm-api:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: LOG_LEVEL
+          value: "INFO"
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        volumeMounts:
+        - name: data-volume
+          mountPath: /app/data
+      volumes:
+      - name: data-volume
+        configMap:
+          name: industrial-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: industrial-llm-service
+spec:
+  selector:
+    app: industrial-llm-api
+  ports:
+  - port: 80
+    targetPort: 8000
+    protocol: TCP
+  type: LoadBalancer

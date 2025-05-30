@@ -1,0 +1,47 @@
+# Virtual environments
+venv/
+env/
+.venv/
+.env
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Database files
+chroma_db/
+*.db
+*.sqlite3
+
+# Large model files
+models/
+*.pt
+*.pth
+*.bin
+*.onnx
+
+# Data files
+data/
+*.csv
+*.json
+*.parquet
+
+# Git and editor files
+.git/
+.github/
+.gitignore
+.vscode/
+.idea/
+
+# Logs and temp files
+logs/
+*.log
+tmp/
+.DS_Store
+
+# Docker files
+Dockerfile*
+docker-compose*
+.dockerignore
