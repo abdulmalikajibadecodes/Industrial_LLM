@@ -1,2 +1,0 @@
- username = docker login -u abdulmalikajibade
- password = dckr_pat_i_elEGkXCmwNUdN2SJMpcSoUoxc
